@@ -1,0 +1,53 @@
+name: Main
+on: [push]
+env:
+  NUGET_AUTH_TOKEN: ${{ secrets.NUGET_API_KEY }}
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        dotnet: [ 'netstandard2.0' ]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup .NET Core SDK ${{ matrix.dotnet }}
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: ${{ matrix.dotnet-version }}
+      - name: Install Dependencies
+        run: dotnet restore
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-${{ github.run_number }}_${{ matrix.dotnet }}
+          path: "/home/runner/work/FdgtBuilder/FdgtBuilder/src/*/bin/Release/${{ matrix.dotnet-version }}/*"
+          retention-days: 1
+
+  publish:
+    if: github.ref == 'refs/heads/main'
+    name: Publish to Nuget
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup .NET Core SDK net6.0
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: ${{ matrix.dotnet-version }}
+      - name: Download Build Artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: build-${{ github.run_number }}_netstandard2.0
+          path: "./src"
+      - name: Install Dependencies
+        run: dotnet restore
+      - name: Create Packages
+        run: |
+          dotnet pack "./src/FdgtBuilder/FdgtBuilder.csproj" -c "Release" -o "./pkgs" --no-build /p:BuildNumber="$GITHUB_RUN_NUMBER"
+          dotnet pack "./src/FdgtBuilder.TwitchLib/FdgtBuilder.TwitchLib.csproj" -c "Release" -o "./pkgs" --no-build /p:BuildNumber="$GITHUB_RUN_NUMBER"
+      - name: Publish
+        run: dotnet nuget push "./pkgs/*.nupkg" -k "$NUGET_AUTH_TOKEN"
