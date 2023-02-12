@@ -50,4 +50,4 @@ jobs:
           dotnet pack "./src/FdgtBuilder/FdgtBuilder.csproj" -c "Release" -o "./pkgs" --no-build /p:BuildNumber="$GITHUB_RUN_NUMBER"
           dotnet pack "./src/FdgtBuilder.TwitchLib/FdgtBuilder.TwitchLib.csproj" -c "Release" -o "./pkgs" --no-build /p:BuildNumber="$GITHUB_RUN_NUMBER"
       - name: Publish
-        run: dotnet nuget push "./pkgs/*.nupkg" -k "$NUGET_AUTH_TOKEN"
+        run: dotnet nuget push "./pkgs/*.nupkg" -k "$NUGET_AUTH_TOKEN" -s https://api.nuget.org/v3/index.json

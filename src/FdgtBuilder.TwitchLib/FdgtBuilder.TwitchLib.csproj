@@ -1,15 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="TwitchLib.Client" Version="3.3.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\FdgtBuilder\FdgtBuilder.csproj" />
-  </ItemGroup>
-
+	<Import Project="../../FdgtBuilder.targets" />
+	<PropertyGroup>
+		<Description>FdgtBuilder extensions for the TwitchLib client.</Description>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="TwitchLib.Client" Version="3.3.1" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\FdgtBuilder\FdgtBuilder.csproj" />
+	</ItemGroup>
 </Project>

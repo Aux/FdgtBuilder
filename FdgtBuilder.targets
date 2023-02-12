@@ -1,0 +1,15 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<PropertyGroup>
+		<VersionPrefix>1.0</VersionPrefix>
+		<VersionSuffix></VersionSuffix>
+		<Authors>Auxesis</Authors>
+		<PackageTags>twitch,fdgt,twitchlib,auxlabs</PackageTags>
+		<PackageProjectUrl>https://github.com/Aux/FdgtBuilder</PackageProjectUrl>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<RepositoryType>git</RepositoryType>
+		<RepositoryUrl>git://github.com/Aux/FdgtBuilder</RepositoryUrl>
+	</PropertyGroup>
+	<PropertyGroup>
+		<TargetFrameworks>netstandard2.0</TargetFrameworks>
+	</PropertyGroup>
+</Project>

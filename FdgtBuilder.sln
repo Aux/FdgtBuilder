@@ -8,12 +8,13 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{50C89C29-42B1-4861-B0A3-1A25DCCEB8BC}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		FdgtBuilder.targets = FdgtBuilder.targets
 		LICENSE = LICENSE
 		.github\workflows\main.yml = .github\workflows\main.yml
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FdgtBuilder.TwitchLib", "src\FdgtBuilder.TwitchLib\FdgtBuilder.TwitchLib.csproj", "{B60FD345-C6ED-4CBE-AD35-55938BDE444B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FdgtBuilder.TwitchLib", "src\FdgtBuilder.TwitchLib\FdgtBuilder.TwitchLib.csproj", "{B60FD345-C6ED-4CBE-AD35-55938BDE444B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
